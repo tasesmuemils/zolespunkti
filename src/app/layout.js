@@ -16,6 +16,8 @@ const APP_TITLE_TEMPLATE = '%s - Zoles punkti';
 const APP_DESCRIPTION =
   "Neskrien pēc lapas un pildspalvas, skaiti 'Zoles' punktus šeit";
 
+// test
+
 export const metadata = {
   manifest: '/manifest.json',
   applicationName: APP_NAME,
