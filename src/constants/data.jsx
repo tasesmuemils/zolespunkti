@@ -333,4 +333,11 @@ export const avatarsArray = [
   { value: '/avatars/avatar_2.jpg' },
   { value: '/avatars/avatar_3.jpg' },
   { value: '/avatars/avatar_4.jpg' },
+  { value: '/avatars/avatar_5.jpg' },
+  { value: '/avatars/avatar_6.jpg' },
+  { value: '/avatars/avatar_8.jpg' },
+  { value: '/avatars/avatar_9.jpg' },
+  { value: '/avatars/avatar_10.jpg' },
+  { value: '/avatars/avatar_11.jpg' },
+  { value: '/avatars/avatar_12.jpg' },
 ];
