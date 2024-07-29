@@ -58,7 +58,7 @@ export default function Profile() {
       .eq('id', user.id)
       .select();
 
-    console.log(updatedUser);
+    // console.log(updatedUser);
 
     if (updatedUser) {
       setUser(updatedUser[0]);
@@ -75,7 +75,7 @@ export default function Profile() {
   //   setOpen(false);
   // };
 
-  console.log(displayName);
+  // console.log(displayName);
 
   if (user) {
     return (

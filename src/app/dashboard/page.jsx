@@ -37,7 +37,7 @@ export default function PrivatePage() {
     <div>test</div>;
   }
 
-  console.log(user);
+  // console.log(user);
 
   if (user) {
     return (
