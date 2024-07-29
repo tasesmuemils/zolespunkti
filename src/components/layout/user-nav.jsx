@@ -47,7 +47,7 @@ export default function UserNav() {
     router.refresh();
   };
 
-  console.log(user);
+  // console.log(user);
 
   if (user) {
     return (

@@ -128,12 +128,12 @@ export default function PlayersForm({ playersCount, setBack }) {
         arg_player_4_score: playersCount == 4 ? [] : null,
       })
       .single();
-    console.log(error);
+    // console.log(error);
     // Do something with the form values.
     // ✅ This will be type-safe and validated.
 
     router.push(`/dashboard/game/${game_id}`);
-    console.log(values);
+    // console.log(values);
   }
 
   const handleValueChange = (value, field, number) => {
@@ -197,7 +197,6 @@ export default function PlayersForm({ playersCount, setBack }) {
                     name='player_1_avatar'
                     render={({ field }) => (
                       <FormItem>
-                        {console.log(field.value)}
                         <FormControl>
                           <Select
                             onValueChange={(e) =>

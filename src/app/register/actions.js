@@ -10,7 +10,7 @@ export async function signup(formData) {
 
   // type-casting here for convenience
   // in practice, you should validate your inputs
-  console.log(formData);
+  // console.log(formData);
   // const data = {
   //   email: formData.get('email'),
   //   password: formData.get('password'),
