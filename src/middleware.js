@@ -1,6 +1,10 @@
 import { updateSession } from '@/utils/superbase/middleware';
 
 export async function middleware(request) {
+  // Check if the request is for a CSS file
+  if (request.nextUrl.pathname.endsWith('.css')) {
+    return NextResponse.next();
+  }
   return await updateSession(request);
 }
 
@@ -15,6 +19,6 @@ export const config = {
      */
     // '/dashboard/game',
     // '/((?!_next/static|_next/image|favicon.ico|sw.js|manifest.json|.*\\.js|.*\\.(?:svg|png|jpg|jpeg|gif|webp|ico|json)$).*)',
-    '/((?!_next/static|_next/image|favicon.ico|sw.js|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
+    '/((?!_next/static|_next/image|favicon.ico|sw.js|.*\\.css|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)',
   ],
 };

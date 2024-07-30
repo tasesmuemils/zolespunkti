@@ -5,4 +5,22 @@ const withSerwist = withSerwistInit({
   swDest: 'public/sw.js',
 });
 
-export default withSerwist({});
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  async headers() {
+    return [
+      {
+        source: '/_next/static/css/:path*',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'text/css',
+          },
+        ],
+      },
+    ];
+  },
+  // Add any other Next.js config options here
+};
+
+export default withSerwist(nextConfig);
