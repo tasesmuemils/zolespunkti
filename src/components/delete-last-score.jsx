@@ -53,7 +53,7 @@ export default function DeleteLastScore({ score, onScoreUpdate }) {
           <DeleteIcon />
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className='max-w-[90%] sm:max-w-[525px]'>
         <AlertDialogHeader>
           <AlertDialogTitle>
             Vai tiešām dzēst pēdējo rezultātu?

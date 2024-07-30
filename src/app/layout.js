@@ -2,11 +2,9 @@ import { Inter } from 'next/font/google';
 import './globals.css';
 import { ThemeProvider } from '@/components/theme-provider';
 
-// import Header from '@/components/component/header';
-
 // Radix UI Themes
 import '@radix-ui/themes/styles.css';
-import { logout } from './logout/actions';
+// import { logout } from './logout/actions';
 
 const inter = Inter({ subsets: ['latin'] });
 
