@@ -117,7 +117,7 @@ export function Controls({ players, gameId, onScoreUpdate }) {
           <AddIcon />
         </Button>
       </DialogTrigger>
-      <DialogContent className='sm:max-w-[425px]'>
+      <DialogContent className='sm:max-w-[425px] max-w-[95%] rounded-lg'>
         {/* CHOOSE GAME TYPE */}
         {!gameType && (
           <>
@@ -309,6 +309,7 @@ const ControlsButton = ({ text, index, onClickFunction }) => {
       // className='rounded-lg text-base leading-6 font-semibold px-6 py-6 m-3 ring-2 ring-inset hover:bg-cyan-500 dark:hover:bg-cyan-500 hover:ring-cyan-500 hover:text-slate-50 ring-slate-500 text-slate-500 dark:text-slate-100 dark:inset transition-all duration-500 dark:bg-slate-500'
       onClick={onClickFunction}
       key={text + index}
+      size='xl'
     >
       {scenarioTextChange(text)}
     </Button>

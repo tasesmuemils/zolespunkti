@@ -59,7 +59,7 @@ export default function GameViewPage({ params }) {
     );
   }
 
-  console.log('TEST', User.id, gamePlayers);
+  // console.log('TEST', User.id, gamePlayers);
 
   // If not the same user, redirect to user page
   if (User.id !== gamePlayers.game_creator) {

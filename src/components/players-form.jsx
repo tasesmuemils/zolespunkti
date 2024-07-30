@@ -203,6 +203,7 @@ export default function PlayersForm({ playersCount, setBack }) {
                               handleValueChange(e, field, 0)
                             }
                             defaultValue={field.value}
+                            className='h-96'
                           >
                             <SelectTrigger>
                               <SelectValue placeholder='Ikona'>
