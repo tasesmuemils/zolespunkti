@@ -39,7 +39,7 @@ export async function updateSession(request) {
   } = await supabase.auth.getUser();
 
   // List of paths that should be accessible without authentication
-  const publicPaths = ['/', '/sw.js'];
+  const publicPaths = ['/', '/sw.js', '/pointstable'];
 
   // Check if the request path is one of the public paths
   const isPublicPath = publicPaths.some(
