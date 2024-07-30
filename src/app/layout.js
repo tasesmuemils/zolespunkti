@@ -5,6 +5,7 @@ import { ThemeProvider } from '@/components/theme-provider';
 // Radix UI Themes
 import '@radix-ui/themes/styles.css';
 // import { logout } from './logout/actions';
+import GoogleAnalytics from '@/components/layout/GoogleAnalytics';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -57,6 +58,9 @@ export const viewport = {
 export default function RootLayout({ children }) {
   return (
     <html lang='en'>
+      <GoogleAnalytics
+        GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_MEASUREMENT_ID}
+      />
       <body className={inter.className}>
         {' '}
         <ThemeProvider
