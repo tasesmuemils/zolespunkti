@@ -3,8 +3,8 @@ import Sidebar from '@/components/layout/sidebar';
 import { Toaster } from '@/components/ui/sonner';
 
 export const metadata = {
-  title: 'Next Shadcn Dashboard Starter',
-  description: 'Basic dashboard with Next.js and Shadcn',
+  title: 'Zoles Punkti',
+  description: 'Panelis',
 };
 
 export default function DashboardLayout({ children }) {

@@ -16,9 +16,14 @@ export default function PointTable() {
   return (
     <>
       <HeaderMain />
-      <div className='flex-1 space-y-4 p-4 mt-9 pt-6 md:p-8'>
+      <div className='flex-1 text-sm text-center space-y-4 p-4 md:mt-10 font-medium mt-14 pb-0 md:pb-0 md:p-8'>
+        <p>
+          Ja redzi kļūdas aplikācijā vai tev ir kādi ieteikumi, raksti uz
+          emils.bisenieks93@gmail.com
+        </p>
+      </div>
+      <div className='flex-1 space-y-4 p-4 pt-6 md:p-8'>
         <div className='flex items-center justify-between space-y-2'>
-          {/* <UserInfo userData={user} /> */}
           <h2 className='text-xl md:text-3xl font-bold tracking-tight'>
             Punktu tabula
           </h2>
