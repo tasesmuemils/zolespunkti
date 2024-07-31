@@ -7,29 +7,31 @@ const withSerwist = withSerwistInit({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  output: 'standalone',
   async headers() {
     return [
       {
-        source: '/_next/static/css/:path*',
+        source: '/_next/static/:path*',
         headers: [
           {
-            key: 'Content-Type',
-            value: 'text/css',
-          },
-        ],
-      },
-      {
-        source: '/_next/static/chunks/:path*',
-        headers: [
-          {
-            key: 'Content-Type',
-            value: 'application/javascript',
+            key: 'Cache-Control',
+            value: 'public, max-age=31536000, immutable',
           },
         ],
       },
     ];
   },
-  // Add any other Next.js config options here
+  // This ensures that all static assets are handled correctly
+  async rewrites() {
+    return [
+      {
+        source: '/_next/static/:path*',
+        destination: '/_next/static/:path*',
+      },
+    ];
+  },
 };
 
 export default withSerwist(nextConfig);
