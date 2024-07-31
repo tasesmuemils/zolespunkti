@@ -18,6 +18,15 @@ const nextConfig = {
           },
         ],
       },
+      {
+        source: '/_next/static/chunks/:path*',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/javascript',
+          },
+        ],
+      },
     ];
   },
   // Add any other Next.js config options here
