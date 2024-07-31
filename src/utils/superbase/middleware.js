@@ -53,12 +53,12 @@ export async function updateSession(request) {
     return NextResponse.redirect(url);
   }
 
-  if (
-    request.nextUrl.pathname.startsWith('/_next/') ||
-    request.nextUrl.pathname.endsWith('.css')
-  ) {
-    return supabaseResponse;
-  }
+  // if (
+  //   request.nextUrl.pathname.startsWith('/_next/') ||
+  //   request.nextUrl.pathname.endsWith('.css')
+  // ) {
+  //   return supabaseResponse;
+  // }
 
   return supabaseResponse;
 }
