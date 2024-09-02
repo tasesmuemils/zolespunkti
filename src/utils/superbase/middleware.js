@@ -33,10 +33,16 @@ export async function updateSession(request) {
   // supabase.auth.getUser(). A simple mistake could make it very hard to debug
   // issues with users being randomly logged out.
 
+  // Check if there is an active session
+  const { data: session } = await supabase.auth.getSession();
+  // console.log('MIddleware session', session);
+
   const {
     data: { user },
     error,
   } = await supabase.auth.getUser();
+
+  // console.log('MIddleware error', error, user);
 
   // List of paths that should be accessible without authentication
   const publicPaths = ['/', '/sw.js', '/pointstable'];

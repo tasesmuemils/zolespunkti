@@ -21,13 +21,14 @@ import Footer from '@/components/layout/footer-main';
 import HeaderMain from '@/components/layout/header-main';
 
 export default function Home() {
-  const handleLoginWithOAuth = (provider) => {
+  const handleLoginWithOAuth = async (provider) => {
     const supabase = createClient();
 
-    supabase.auth.signInWithOAuth({
+    await supabase.auth.signInWithOAuth({
       provider: provider,
       options: {
         redirectTo: `${location.origin}/auth/callback?next=/dashboard`,
+        prompt: 'select_account',
       },
     });
   };

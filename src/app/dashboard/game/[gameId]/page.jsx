@@ -25,6 +25,7 @@ export default function GameViewPage({ params }) {
       } = await supabase.auth.getUser();
 
       setUser(user);
+      // console.log('user', user);
 
       const { data: game_players } = await supabase
         .from('game_players')
@@ -32,6 +33,7 @@ export default function GameViewPage({ params }) {
         .eq('id', params.gameId);
 
       if (game_players) {
+        // console.log('game_players', game_players);
         setGamePlayers(game_players[0]);
       }
 
