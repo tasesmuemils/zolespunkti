@@ -1,6 +1,7 @@
 'use client';
 // import { redirect } from 'next/navigation';
 // import { createClient } from '../../utils/superbase/server';
+
 import Link from 'next/link';
 import {
   Card,
@@ -14,9 +15,19 @@ import { Button } from '@/components/ui/button';
 import { RecentGames } from '@/components/recent-games';
 import { useUser } from '@/hooks/useUser';
 import { Separator } from '@/components/ui/separator';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { UserSearch } from '@/components/search-users';
 
 export default function PrivatePage() {
   const { user } = useUser();
+  console.log(user);
 
   // Set user ID global
   // const supabase = createClient();
@@ -69,6 +80,26 @@ export default function PrivatePage() {
                 <RecentGames user={user} />
               </CardContent>
             </Card>
+            {/* <Card className='col-span-4 md:col-span-3'>
+              <CardHeader className='flex flex-row justify-between items-center'>
+                <CardTitle className='text-xl md:text-2xl'>Draugi</CardTitle>
+                <Dialog>
+                  <DialogTrigger>
+                    <Button variant='outline'>Uzaicini draugus</Button>
+                  </DialogTrigger>
+                  <DialogContent>
+                    <DialogHeader>
+                      <DialogTitle>Uzaicini draugus</DialogTitle>
+                      <DialogDescription>
+                        Meklē draugus pēc lietotājvārda
+                      </DialogDescription>
+                    </DialogHeader>
+                    <UserSearch />
+                  </DialogContent>
+                </Dialog>
+              </CardHeader>
+              <CardContent></CardContent>
+            </Card> */}
           </div>
         </div>
       </ScrollArea>

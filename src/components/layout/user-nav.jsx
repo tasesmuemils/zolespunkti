@@ -30,10 +30,14 @@ export default function UserNav() {
         data: { user },
       } = await supabase.auth.getUser();
 
-      const { data: profile } = await supabase.from('profiles').select();
-      // .eq('id', user.id);
+      // console.log(user);
 
-      // console.log(profile);
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select()
+        .eq('id', user.id);
+
+      // console.log('Profiles', profile);
 
       setUser(profile[0]);
     };
