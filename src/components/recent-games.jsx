@@ -9,16 +9,18 @@ import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from './ui/separator';
+import { Loader2 } from 'lucide-react';
 
 export function RecentGames({ user }) {
   const [games, setGames] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const getData = async () => {
       const supabase = createClient();
       const { data: db_games, error } = await supabase
         .from('game_players')
-        .select(`*, game_scores(*)`)
+        .select()
 
         .order('created_at', { ascending: false });
 
@@ -28,7 +30,49 @@ export function RecentGames({ user }) {
     };
 
     getData();
+
+    const supabase = createClient();
+    const channel = supabase
+      .channel('recent-games-channel')
+      .on(
+        'postgres_changes',
+        {
+          event: '*',
+          schema: 'public',
+          table: 'game_players',
+          // filter: `to_user_id=eq.${user.id}`,
+        },
+        (payload) => handleRealtimeUpdate(payload)
+      )
+      .subscribe();
+
+    // Cleanup function
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [user.id]);
+
+  const handleRealtimeUpdate = (payload) => {
+    const { eventType, new: newRecord, old: oldRecord } = payload;
+
+    switch (eventType) {
+      case 'INSERT':
+        setGames((prev) => [newRecord, ...prev]);
+        break;
+      case 'UPDATE':
+        setGames((prev) =>
+          prev.map((game) =>
+            game.id === newRecord.id ? { ...game, ...newRecord } : game
+          )
+        );
+        break;
+      case 'DELETE':
+        setGames((prev) => prev.filter((game) => game.id !== oldRecord.id));
+        break;
+      default:
+        console.log('Unhandled event type', eventType);
+    }
+  };
 
   if (!games) {
     return (
@@ -64,6 +108,7 @@ export function RecentGames({ user }) {
     return <p>{`Spied "Jauna spēle" un sāc skaitīt punktus`}</p>;
   }
 
+  console.log(games);
   if (games) {
     return (
       <div className='space-y-8'>
@@ -77,7 +122,7 @@ export function RecentGames({ user }) {
               <Avatar className='h-9 w-9'>
                 {/* <AvatarImage src='/avatars/01.png' alt='Avatar' /> */}
                 <AvatarFallback>
-                  {game.game_scores.player_1_score.length}
+                  {game.game_sessions_count && game.game_sessions_count}
                 </AvatarFallback>
               </Avatar>
               <div className='ml-4 space-y-1'>
@@ -88,7 +133,15 @@ export function RecentGames({ user }) {
               <div className='ml-auto font-medium'>
                 {index == 0 ? (
                   <Link href={`/dashboard/game/${game.id}`}>
-                    <Button className='text-xs md:text-sm'>Turpināt</Button>
+                    <Button
+                      className='text-xs md:text-sm'
+                      onClick={() => setLoading(true)}
+                    >
+                      {loading && (
+                        <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                      )}
+                      Turpināt
+                    </Button>
                   </Link>
                 ) : (
                   <Button className='invisible'>Turpināt</Button>

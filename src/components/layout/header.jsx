@@ -12,10 +12,12 @@ import {
 import { ModeToggle } from '@/components/component/mode-toogle';
 import Link from 'next/link';
 import UserNav from '@/components/layout/user-nav';
+import Notifications from '@/components/layout/notifications';
 import { MobileSidebar } from '@/components/layout/mobile-sidebar';
 import { cn } from '@/lib/utils';
 import Image from 'next/image';
 import FullLogo from '../../../public/logos/full_logo.svg';
+import { Bell } from 'lucide-react';
 
 export default function Navbar() {
   return (
@@ -31,8 +33,9 @@ export default function Navbar() {
           <MobileSidebar />
         </div>
 
-        <div className='flex items-center gap-2'>
+        <div className='flex items-center gap-3'>
           <UserNav />
+          <Notifications />
           <ModeToggle />
         </div>
       </nav>

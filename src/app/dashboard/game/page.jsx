@@ -11,6 +11,7 @@ import {
   CardTitle,
 } from '@/components/ui/card';
 import PlayersForm from '@/components/players-form';
+import StepPlayersForm from '@/components/step-players-form';
 
 export default function Game() {
   const [playersCount, setPlayersCount] = useState(null);
@@ -34,8 +35,8 @@ export default function Game() {
           </CardHeader>
           <CardContent>
             <div className='flex space-x-4 justify-center'>
-              <PlayersCount number='3' setPlayersCount={handlePlayersCount} />
-              <PlayersCount number='4' setPlayersCount={handlePlayersCount} />
+              <PlayersCount number={3} setPlayersCount={handlePlayersCount} />
+              <PlayersCount number={4} setPlayersCount={handlePlayersCount} />
             </div>
           </CardContent>
           <CardFooter className='flex justify-center text-center'>
@@ -47,7 +48,8 @@ export default function Game() {
   }
 
   return (
-    <PlayersForm playersCount={playersCount} setBack={handlePlayersCount} />
+    // <PlayersForm playersCount={playersCount} setBack={handlePlayersCount} />
+    <StepPlayersForm playersCount={playersCount} setBack={handlePlayersCount} />
   );
 }
 

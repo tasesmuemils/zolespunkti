@@ -96,6 +96,12 @@ export const navItems = [
     icon: 'sheet',
     label: 'pointstable',
   },
+  {
+    title: 'Draugi',
+    href: '/dashboard/friends',
+    icon: 'friends',
+    label: 'friends',
+  },
   // {
   //   title: 'Employee',
   //   href: '/dashboard/employee',

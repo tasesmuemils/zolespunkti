@@ -32,6 +32,8 @@ import {
   X,
   Trash2,
   Sheet,
+  Info,
+  Handshake,
 } from 'lucide-react';
 
 export const Icons = {
@@ -83,4 +85,6 @@ export const Icons = {
   twitter: Twitter,
   check: Check,
   delete: Trash2,
+  info: Info,
+  friends: Handshake,
 };
