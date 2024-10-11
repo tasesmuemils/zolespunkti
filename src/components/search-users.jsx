@@ -21,6 +21,7 @@ import {
 } from '@/components/ui/popover';
 import { createClient } from '@/utils/superbase/client';
 import { Loader2 } from 'lucide-react';
+import { Dialog, DialogContent, DialogTrigger } from '@/components/ui/dialog';
 
 export function UserSearch({ userId, closeDialog }) {
   const [open, setOpen] = useState(false);
@@ -134,21 +135,20 @@ export function UserSearch({ userId, closeDialog }) {
 
   return (
     <>
-      <Drawer open={open} onOpenChange={setOpen}>
-        <DrawerTrigger asChild>
+      <Dialog open={open} onOpenChange={setOpen}>
+        <DialogTrigger asChild>
           <Button variant='outline' className='w-full'>
             {selectedUser ? (
               <>{selectedUser.display_name}</>
             ) : (
               <>
-                {' '}
                 <UserPlus className='w-4 h-4 mr-2' />
-                Uzaicini draugu
+                Uzaicini draugus
               </>
             )}
           </Button>
-        </DrawerTrigger>
-        <DrawerContent>
+        </DialogTrigger>
+        <DialogContent className='w-[95%]'>
           <div className='mt-4 border-t'>
             <StatusList
               setOpen={setOpen}
@@ -158,8 +158,8 @@ export function UserSearch({ userId, closeDialog }) {
               setSearchTerm={setSearchTerm}
             />
           </div>
-        </DrawerContent>
-      </Drawer>
+        </DialogContent>
+      </Dialog>
       {selectedUser && (
         <Button onClick={handleInvitation} disabled={loading}>
           {loading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
@@ -167,6 +167,40 @@ export function UserSearch({ userId, closeDialog }) {
         </Button>
       )}
     </>
+    // <>
+    //   <Drawer open={open} onOpenChange={setOpen} side='top'>
+    //     <DrawerTrigger asChild>
+    //       <Button variant='outline' className='w-full'>
+    //         {selectedUser ? (
+    //           <>{selectedUser.display_name}</>
+    //         ) : (
+    //           <>
+    //             {' '}
+    //             <UserPlus className='w-4 h-4 mr-2' />
+    //             Uzaicini draugussss
+    //           </>
+    //         )}
+    //       </Button>
+    //     </DrawerTrigger>
+    //     <DrawerContent>
+    //       <div className='mt-4 border-t'>
+    //         <StatusList
+    //           setOpen={setOpen}
+    //           users={users}
+    //           setSelectedUser={setSelectedUser}
+    //           searchTerm={searchTerm}
+    //           setSearchTerm={setSearchTerm}
+    //         />
+    //       </div>
+    //     </DrawerContent>
+    //   </Drawer>
+    //   {selectedUser && (
+    //     <Button onClick={handleInvitation} disabled={loading}>
+    //       {loading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
+    //       Uzaicināt
+    //     </Button>
+    //   )}
+    // </>
   );
 }
 
