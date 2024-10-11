@@ -211,7 +211,7 @@ function StatusList({
   searchTerm,
   setSearchTerm,
 }) {
-  // console.log('USERS', users);
+  // FIND FREINDS
   return (
     <Command className='z-[100]'>
       <CommandInput
