@@ -40,13 +40,15 @@ export default function VersionUpdate() {
         </DialogHeader>
         <div className='grid gap-4 py-4'>
           <ul className='list-disc list-inside space-y-2'>
-            <li>Iespēja uzaicināt draugus, kuri jau lieto "Zoles Punkti"</li>
+            <li>
+              Iespēja uzaicināt draugus, kuri jau lieto &quot;Zoles Punkti&quot;
+            </li>
             <li>Pievieno uzaicinātos draugus spēlei</li>
             <li>
               Realtime sync - visi spēles dalībnieki var redzēt un labot
               rezultātus katrs savā ierīcē reāllaikā
             </li>
-            <li>Punktu tabulai pievienots indikators "Dalītājs"</li>
+            <li>Punktu tabulai pievienots indikators &quot;Dalītājs&quot;</li>
             <li>Vairāki kļūdu labojumi</li>
           </ul>
         </div>
