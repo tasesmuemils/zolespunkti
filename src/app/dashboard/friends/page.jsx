@@ -57,7 +57,7 @@ export default function PrivatePage() {
                       Uzaicini draugus
                     </Button>
                   </DialogTrigger>
-                  <DialogContent>
+                  <DialogContent className='w-[95%]'>
                     <DialogHeader>
                       <DialogTitle>Uzaicini draugus</DialogTitle>
                       <DialogDescription>
