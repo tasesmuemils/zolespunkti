@@ -38,6 +38,8 @@ import {
 import { useState } from 'react';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { Icons } from '@/components/icons';
+import { FormCustomInput } from '@/components/form-custom-input';
+import { Loader2 } from 'lucide-react';
 
 const BackIcon = Icons['arrowLeft'];
 
@@ -48,10 +50,13 @@ const avatarValues = avatarsArray.map((avatar) => avatar.value);
 const isAvatarValue = (value) => avatarValues.includes(value);
 
 const baseFormSchema = z.object({
-  player: z
-    .string({ message: 'Vārds ir obligāts' })
-    .min(2, { message: 'Vārdam jāsatur vismaz 2 simboli' })
-    .max(50, { message: 'Vārds nedrīkst saturēt vairāk kā 20 simbolus' }),
+  player: z.object({
+    display_name: z
+      .string({ required_error: 'Vārds ir obligāts' })
+      .min(2, { message: 'Vārdam jāsatur vismaz 2 simboli' })
+      .max(50, { message: 'Vārds nedrīkst saturēt vairāk kā 50 simbolus' }),
+    id: z.string().nullable(),
+  }),
   player_avatar: z.string().refine(isAvatarValue, {
     message: 'Izvēlies ikonu',
   }),
@@ -75,6 +80,7 @@ export default function PlayersForm({ playersCount, setBack }) {
     { value: [] },
     playersCount == 4 && { value: [] },
   ]);
+  const [loading, setLoading] = useState(false);
 
   const handleBackClick = (e) => {
     e.preventDefault();
@@ -98,41 +104,43 @@ export default function PlayersForm({ playersCount, setBack }) {
   const form = useForm({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      player_1: user.display_name,
+      player_1: { display_name: user.display_name, id: user.id },
       player_1_avatar: user.image_url,
-      player_2: '',
+      player_2: { display_name: '', id: null },
       player_2_avatar: '',
-      player_3: '',
+      player_3: { display_name: '', id: null },
       player_3_avatar: '',
-      player_4: '',
+      player_4: { display_name: '', id: null },
       player_4_avatar: '',
     },
   });
 
   // 2. Define a submit handler.
   async function onSubmit(values) {
-    let { data: game_id, error } = await supabase
-      .rpc('game_create', {
-        arg_game_creator: user.id,
-        arg_player_1: values.player_1,
-        arg_player_1_avatar: values.player_1_avatar,
-        arg_player_1_score: [],
-        arg_player_2: values.player_2,
-        arg_player_2_avatar: values.player_2_avatar,
-        arg_player_2_score: [],
-        arg_player_3: values.player_3,
-        arg_player_3_avatar: values.player_3_avatar,
-        arg_player_3_score: [],
-        arg_player_4: playersCount == 4 ? values.player_4 : null,
-        arg_player_4_avatar: playersCount == 4 ? values.player_4_avatar : null,
-        arg_player_4_score: playersCount == 4 ? [] : null,
-      })
-      .single();
-    // console.log(error);
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
+    console.log(values);
 
-    router.push(`/dashboard/game/${game_id}`);
+    // let { data: game_id, error } = await supabase
+    //   .rpc('game_create', {
+    //     arg_game_creator: user.id,
+    //     arg_player_1: values.player_1,
+    //     arg_player_1_avatar: values.player_1_avatar,
+    //     arg_player_1_score: [],
+    //     arg_player_2: values.player_2,
+    //     arg_player_2_avatar: values.player_2_avatar,
+    //     arg_player_2_score: [],
+    //     arg_player_3: values.player_3,
+    //     arg_player_3_avatar: values.player_3_avatar,
+    //     arg_player_3_score: [],
+    //     arg_player_4: playersCount == 4 ? values.player_4 : null,
+    //     arg_player_4_avatar: playersCount == 4 ? values.player_4_avatar : null,
+    //     arg_player_4_score: playersCount == 4 ? [] : null,
+    //   })
+    //   .single();
+    // // console.log(error);
+    // // Do something with the form values.
+    // // ✅ This will be type-safe and validated.
+
+    // router.push(`/dashboard/game/${game_id}`);
     // console.log(values);
   }
 
@@ -172,17 +180,15 @@ export default function PlayersForm({ playersCount, setBack }) {
                   {' '}
                   <FormField
                     control={form.control}
-                    name='player_1'
+                    name='player_1.diplay_name'
                     render={({ field }) => (
                       <FormItem>
-                        {/* <FormLabel>Username</FormLabel> */}
                         <FormControl>
                           <Input
                             {...field}
                             id='player1'
                             placeholder='Ievadi vārdu'
                           />
-                          {/* <Input placeholder='shadcn' {...field} /> */}
                         </FormControl>
 
                         {/* <FormDescription>
@@ -258,7 +264,12 @@ export default function PlayersForm({ playersCount, setBack }) {
                       <FormItem>
                         {/* <FormLabel>Username</FormLabel> */}
                         <FormControl>
-                          <Input
+                          {/* <Input
+                            {...field}
+                            id='player2'
+                            placeholder='Ievadi vārdu'
+                          /> */}
+                          <FormCustomInput
                             {...field}
                             id='player2'
                             placeholder='Ievadi vārdu'
@@ -334,7 +345,7 @@ export default function PlayersForm({ playersCount, setBack }) {
                   {' '}
                   <FormField
                     control={form.control}
-                    name='player_3'
+                    name='player_3.display_name'
                     render={({ field }) => (
                       <FormItem>
                         {/* <FormLabel>Username</FormLabel> */}
@@ -497,7 +508,10 @@ export default function PlayersForm({ playersCount, setBack }) {
                   <Button variant='outline' onClick={handleBackClick}>
                     <BackIcon />
                   </Button>
-                  <Button type='submit'>Sākt spēli</Button>
+                  <Button type='submit' onClick={() => setLoading(true)}>
+                    <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+                    Sākt spēli
+                  </Button>
                 </div>
               </form>
             </Form>

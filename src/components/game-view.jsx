@@ -15,6 +15,10 @@ import { useState, useEffect, useRef } from 'react';
 import { Separator } from '@/components/ui/separator';
 import DeleteLastScore from '@/components/delete-last-score';
 import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
+
+import { Icons } from '@/components/icons';
+const InfoIcon = Icons['info'];
 
 export default function GameView({ gamedata, gamescore }) {
   const [score, setScore] = useState(gamescore);
@@ -99,6 +103,8 @@ export default function GameView({ gamedata, gamescore }) {
       };
     });
 
+  const avatarBorder = players[0].score.length % players.length;
+
   return (
     <Card
       className='relative block z-30 mx-auto max-w-md mb-10'
@@ -107,22 +113,36 @@ export default function GameView({ gamedata, gamescore }) {
       <Sheet>
         <SheetTrigger className='flex-1 w-full sticky bg-background top-0 z-30 border-b justify-center items-center'>
           <CardHeader
-            className={`grid ${
+            className={`relative grid ${
               players.length == 3 ? 'grid-cols-3' : 'grid-cols-4'
             } sticky bg-background top-0 z-30 border-b justify-center items-center`}
           >
+            <Button
+              variant='outline'
+              className='absolute -top-2 -left-2 w-8 h-8'
+              size='icon'
+            >
+              <InfoIcon className='w-4 h-4' />
+            </Button>
             {players.map((player, key) => (
               <div
                 style={{ margin: '0px' }}
                 key={key}
                 className='grid justify-center items-center'
               >
-                <Avatar className='h-12 w-12 m-0'>
-                  <AvatarImage
-                    src={player.player_avatar}
-                    alt={`avatar_${key}`}
-                  />
-                </Avatar>
+                <div
+                  className={`inline-block rounded-full p-[4.5px] ${
+                    key == avatarBorder ? 'bg-primary' : ''
+                  }`}
+                >
+                  {' '}
+                  <Avatar className='h-12 w-12 m-0 border-spacing-4'>
+                    <AvatarImage
+                      src={player.player_avatar}
+                      alt={`avatar_${key}`}
+                    />
+                  </Avatar>
+                </div>
               </div>
             ))}
           </CardHeader>
@@ -132,8 +152,9 @@ export default function GameView({ gamedata, gamescore }) {
             <CardHeader>
               <div className='flex flex-row justify-between items-center'>
                 <h1>Spēlētāji</h1>
-                <div className='flex flex-col justify-center items-center'>
-                  <Avatar className='h-9 w-9'>
+                <div className='flex space-x-2 flex-row justify-center items-center'>
+                  <h4 className=' text-sm'>Partijas</h4>
+                  <Avatar className='h-7 w-7'>
                     <AvatarFallback>{players[0].score.length}</AvatarFallback>
                   </Avatar>
                 </div>
@@ -144,14 +165,34 @@ export default function GameView({ gamedata, gamescore }) {
               {leaderBoard.map((player, index) => (
                 <div key={index} className='flex items-center gap-4'>
                   <p className='text-2xl'>{player.medal}</p>
-                  <Avatar className='h-12 w-12 m-0'>
-                    <AvatarImage
-                      src={player.player_avatar}
-                      alt={`avatar_${player.player}`}
-                    />
-                  </Avatar>
-                  <p>{player.player}</p>
-                  <Badge>{player.score.slice(-1)[0]}</Badge>
+                  <div
+                    className={`inline-block rounded-full p-[4.5px] ${
+                      index == avatarBorder ? 'bg-primary' : ''
+                    }`}
+                  >
+                    {' '}
+                    <Avatar className={`h-12 w-12 m-0 `}>
+                      <AvatarImage
+                        src={player.player_avatar}
+                        alt={`avatar_${player.player}`}
+                      />
+                    </Avatar>
+                  </div>
+
+                  <div>
+                    <p>{player.player}</p>
+                    <div className='flex space-x-2 pt-1'>
+                      <Badge>
+                        {player.score.slice(-1)[0] != undefined
+                          ? player.score.slice(-1)[0]
+                          : 0}
+                      </Badge>
+
+                      {index == avatarBorder && (
+                        <Badge variant='outline'>Dalītājs</Badge>
+                      )}
+                    </div>
+                  </div>
                 </div>
               ))}
             </CardContent>

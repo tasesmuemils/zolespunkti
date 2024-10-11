@@ -1,9 +1,10 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-
+import { toast } from 'sonner';
 import { useMediaQuery } from '@/hooks/use-media-query';
 import { Button } from '@/components/ui/button';
+import { UserPlus } from 'lucide-react';
 import {
   Command,
   CommandEmpty,
@@ -19,18 +20,21 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { createClient } from '@/utils/superbase/client';
+import { Loader2 } from 'lucide-react';
 
-export function UserSearch() {
+export function UserSearch({ userId, closeDialog }) {
   const [open, setOpen] = useState(false);
   const isDesktop = useMediaQuery('(min-width: 768px)');
   const [selectedUser, setSelectedUser] = useState(null);
   const [users, setUsers] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [loading, setLoading] = useState(false);
+
+  const supabase = createClient();
 
   useEffect(() => {
     const searchUsers = async () => {
       if (searchTerm.length > 2) {
-        const supabase = createClient();
         const { data, error } = await supabase
           .from('profiles')
           .select()
@@ -57,16 +61,49 @@ export function UserSearch() {
     return () => clearTimeout(timeoutId);
   }, [searchTerm]);
 
+  const handleInvitation = () => {
+    setLoading(true);
+
+    // toast(`Uzaicinājums nosūtīts ${selectedUser.display_name}! 🎉`);
+    const sendInvitation = async (fromUserId, toUserId) => {
+      const { data, error } = await supabase
+        .from('invitations')
+        .insert({
+          from_user_id: fromUserId,
+          to_user_id: toUserId,
+          status: 'pending',
+        })
+        .select();
+
+      if (data && !error) {
+        closeDialog();
+        toast(`Uzaicinājums nosūtīts ${selectedUser.display_name}! 🎉`);
+      } else if (error && error.code == '23505') {
+        closeDialog();
+        toast(`Spēlētājs jau ir tavā draugu sarakstā 🧑‍🤝‍🧑`);
+      } else {
+        closeDialog();
+        toast(`Uzaicinājuma nosūtīšana neizdevās! 😔`);
+      }
+    };
+
+    sendInvitation(userId, selectedUser.id);
+  };
+
   if (isDesktop) {
     return (
       <>
         <Popover className='z-[100]' open={open} onOpenChange={setOpen}>
           <PopoverTrigger asChild>
-            <Button variant='outline' className='w-[150px] justify-center'>
+            <Button variant='outline' className='w-full'>
               {selectedUser ? (
                 <>{selectedUser.display_name}</>
               ) : (
-                <>+ Uzaicini draugu</>
+                <>
+                  {' '}
+                  <UserPlus className='w-4 h-4 mr-2' />
+                  Uzaicini draugu
+                </>
               )}
             </Button>
           </PopoverTrigger>
@@ -85,7 +122,12 @@ export function UserSearch() {
             />
           </PopoverContent>
         </Popover>
-        {selectedUser && <Button>Uzaicināt</Button>}
+        {selectedUser && (
+          <Button onClick={handleInvitation} disabled={loading}>
+            {loading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
+            Uzaicināt
+          </Button>
+        )}
       </>
     );
   }
@@ -94,11 +136,15 @@ export function UserSearch() {
     <>
       <Drawer open={open} onOpenChange={setOpen}>
         <DrawerTrigger asChild>
-          <Button variant='outline' className='w-[150px] justify-start'>
+          <Button variant='outline' className='w-full'>
             {selectedUser ? (
               <>{selectedUser.display_name}</>
             ) : (
-              <>+ Uzaicini draugu</>
+              <>
+                {' '}
+                <UserPlus className='w-4 h-4 mr-2' />
+                Uzaicini draugu
+              </>
             )}
           </Button>
         </DrawerTrigger>
@@ -114,7 +160,12 @@ export function UserSearch() {
           </div>
         </DrawerContent>
       </Drawer>
-      {selectedUser && <Button>Uzaicināt</Button>}
+      {selectedUser && (
+        <Button onClick={handleInvitation} disabled={loading}>
+          {loading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
+          Uzaicināt
+        </Button>
+      )}
     </>
   );
 }
