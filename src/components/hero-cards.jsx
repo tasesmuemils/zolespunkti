@@ -44,14 +44,14 @@ export const HeroCards = () => {
 
       {/* Team */}
       <Card className='my-4 lg:my-0 lg:absolute lg:right-[20px] lg:top-4 lg:w-80 flex flex-col justify-center items-center drop-shadow-xl shadow-black/10 dark:shadow-white/10'>
-        <CardHeader className='mt-8 flex justify-center items-center pb-2'>
-          <Image
+        <CardHeader className=' flex justify-center items-center pb-2'>
+          {/* <Image
             src='/emils_avatar.jpeg'
             alt='user avatar'
             className='absolute grayscale-[0%] -top-8 rounded-full w-16 h-16 aspect-square object-cover'
             width={100}
             height={100}
-          />
+          /> */}
           <CardTitle className='text-center'>Emīls Bisenieks</CardTitle>
           <CardDescription className='font-normal text-primary'>
             Frontend izstrādātājs
@@ -177,7 +177,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Service */}
-      <Card className='lg:absolute lg:w-[350px] lg:-right-[10px] lg:bottom-[80px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10'>
+      <Card className='lg:absolute lg:w-[350px] lg:-right-[10px] lg:bottom-[110px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10'>
         <CardHeader className='space-y-1 flex md:flex-row justify-start items-start gap-4'>
           <div className='mt-1 bg-primary/20 p-1 rounded-2xl'>
             <LightBulbIcon />
