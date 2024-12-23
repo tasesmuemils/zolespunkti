@@ -22,7 +22,7 @@ export const HeroCards = () => {
   return (
     <div className='mt-32 lg:mt-0 grid grid-cols-1 lg:flex lg:flex-row lg:flex-wrap gap-8 relative lg:w-[700px] lg:h-[500px]'>
       {/* Testimonial */}
-      <Card className='lg:absolute lg:w-[340px] lg:-top-[15px] drop-shadow-xl shadow-black/10 dark:shadow-white/10'>
+      <Card className='lg:absolute lg:w-[340px] lg:-top-[15px] drop-shadow-xl shadow-black/10 dark:shadow-white/10 order-1'>
         <CardHeader className='flex flex-row items-center gap-4 pb-2'>
           {/* <Avatar>
             <AvatarImage alt='' src='/emils_avatar.jpeg' />
@@ -43,7 +43,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Team */}
-      <Card className='my-4 lg:my-0 lg:absolute lg:right-[20px] lg:top-4 lg:w-80 flex flex-col justify-center items-center drop-shadow-xl shadow-black/10 dark:shadow-white/10'>
+      <Card className='my-4 lg:my-0 lg:absolute lg:right-[20px] lg:top-4 lg:w-80 flex flex-col justify-center items-center drop-shadow-xl shadow-black/10 dark:shadow-white/10 order-4 lg:order-2'>
         <CardHeader className=' flex justify-center items-center pb-2'>
           {/* <Image
             src='/emils_avatar.jpeg'
@@ -134,7 +134,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Pricing */}
-      <Card className='lg:absolute lg:top-[150px] lg:left-[50px] lg:w-72  drop-shadow-xl shadow-black/10 dark:shadow-white/10'>
+      <Card className='lg:absolute lg:top-[150px] lg:left-[50px] lg:w-72  drop-shadow-xl shadow-black/10 dark:shadow-white/10 order-2 lg:order-3'>
         {/* <CardHeader>
           <CardTitle className='flex item-center justify-between'>
             Free
@@ -177,7 +177,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Service */}
-      <Card className='lg:absolute lg:w-[350px] lg:-right-[10px] lg:bottom-[110px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10'>
+      <Card className='lg:absolute lg:w-[350px] lg:-right-[10px] lg:bottom-[110px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10 order-3 lg:order-4'>
         <CardHeader className='space-y-1 flex md:flex-row justify-start items-start gap-4'>
           <div className='mt-1 bg-primary/20 p-1 rounded-2xl'>
             <LightBulbIcon />
