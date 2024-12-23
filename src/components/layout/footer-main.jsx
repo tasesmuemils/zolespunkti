@@ -3,8 +3,8 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <div className=' fixed left-0 right-0 bottom-0 z-20 border-b bg-background/95 backdrop-blur'>
-      <div className='flex h-14 items-center justify-center px-4 '>
+    <div className='my-14'>
+      <div className='grid grid-cols-1 items-center justify-center px-4 '>
         <div className='flex justify-center gap-2'>
           <a
             href='https://zolespunkti-old.netlify.app/'
@@ -21,6 +21,19 @@ export default function Footer() {
             </Button>
           </Link>
         </div>
+        <section className='container pt-9 text-center'>
+          <h3>
+            &copy; {new Date().getFullYear()} Zoles Punkti -{' '}
+            <a
+              rel='noreferrer noopener'
+              target='_blank'
+              href='https://www.bisenieks.dev/'
+              className='text-primary transition-all border-primary hover:border-b-2'
+            >
+              Emīls Bisenieks
+            </a>
+          </h3>
+        </section>
       </div>
     </div>
   );
