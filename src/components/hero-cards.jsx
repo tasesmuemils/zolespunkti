@@ -166,6 +166,7 @@ export const HeroCards = () => {
               'Punktu tabula',
               'Partiju skaits un rezultātu tabula',
               'Spēļu vēsture',
+              'Skaiti EUR punktā',
             ].map((benefit) => (
               <span key={benefit} className='flex'>
                 <Check className='text-green-500' />{' '}

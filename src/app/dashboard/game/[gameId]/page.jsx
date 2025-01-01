@@ -141,6 +141,7 @@ export default function GameViewPage({ params }) {
   }
 
   if (gamePlayers && gameScore) {
+    // console.log('first gamescore', gameScore, gamePlayers);
     return (
       <ScrollArea className='h-full'>
         <div className='flex-1 space-y-4 p-4 pt-6 md:p-8'>

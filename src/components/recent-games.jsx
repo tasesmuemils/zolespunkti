@@ -9,7 +9,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from './ui/separator';
-import { Loader2 } from 'lucide-react';
+import { EuroIcon, Loader2 } from 'lucide-react';
 
 export function RecentGames({ user }) {
   const [games, setGames] = useState(null);
@@ -108,7 +108,7 @@ export function RecentGames({ user }) {
     return <p>{`Spied "Jauna spēle" un sāc skaitīt punktus`}</p>;
   }
 
-  console.log(games);
+  // console.log(games);
   if (games) {
     return (
       <div className='space-y-8'>
@@ -148,20 +148,29 @@ export function RecentGames({ user }) {
                 )}
               </div>
             </div>
-            <div className='flex flex-wrap pt-3 gap-1 text-sm text-muted-foreground'>
-              <Badge variant='outline' className='flex flex-wrap text-wrap'>
-                {game.player_1}
-              </Badge>
-              <Badge variant='outline' className=''>
-                {game.player_2}
-              </Badge>
-              <Badge variant='outline' className=''>
-                {game.player_3}
-              </Badge>
-              {game.player_4 && (
-                <Badge variant='outline' className=''>
-                  {game.player_4}
+            <div className='flex justify-between '>
+              <div className='flex flex-wrap pt-3 gap-1 text-sm text-muted-foreground'>
+                <Badge variant='outline' className='flex flex-wrap text-wrap'>
+                  {game.player_1}
                 </Badge>
+                <Badge variant='outline' className=''>
+                  {game.player_2}
+                </Badge>
+                <Badge variant='outline' className=''>
+                  {game.player_3}
+                </Badge>
+                {game.player_4 && (
+                  <Badge variant='outline' className=''>
+                    {game.player_4}
+                  </Badge>
+                )}
+              </div>
+              {game.eur_points && (
+                <div className='flex items-end'>
+                  <Badge variant='secondary'>
+                    {game.eur_points} <EuroIcon className='ml-1 w-4 h-4' />
+                  </Badge>
+                </div>
               )}
             </div>
             <Separator className='mt-4' />
