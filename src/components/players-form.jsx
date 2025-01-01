@@ -117,8 +117,7 @@ export default function PlayersForm({ playersCount, setBack }) {
 
   // 2. Define a submit handler.
   async function onSubmit(values) {
-    console.log(values);
-
+    // console.log(values);
     // let { data: game_id, error } = await supabase
     //   .rpc('game_create', {
     //     arg_game_creator: user.id,
@@ -139,7 +138,6 @@ export default function PlayersForm({ playersCount, setBack }) {
     // // console.log(error);
     // // Do something with the form values.
     // // ✅ This will be type-safe and validated.
-
     // router.push(`/dashboard/game/${game_id}`);
     // console.log(values);
   }

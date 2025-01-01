@@ -20,7 +20,7 @@ import { createClient } from '../utils/superbase/client';
 
 const AddIcon = Icons['add'];
 
-export function Controls({ players, gameId, onScoreUpdate }) {
+export function Controls({ players, gameId, onScoreUpdate, scenarios }) {
   const [winner, setWinner] = useState(null); // sets winner name
   const [gameType, setGameType] = useState(null); // sets gametype
   const [lielais, setLielais] = useState(null); // sets "Lielais"
@@ -78,6 +78,9 @@ export function Controls({ players, gameId, onScoreUpdate }) {
 
     handleOpenChange(false);
 
+    // console.log('arr', arr);
+    // console.log(winner, gameType, lielais);
+
     // Record data to DB
     const supabase = createClient();
 
@@ -88,6 +91,10 @@ export function Controls({ players, gameId, onScoreUpdate }) {
         player_2_score: arr[1].score,
         player_3_score: arr[2].score,
         player_4_score: arr.length == 4 ? arr[3].score : null,
+        scenarios:
+          scenarios != null
+            ? [...scenarios, { W: winner, GT: gameType, L: lielais }]
+            : null,
       }) // Assuming 'data' is the jsonb column
       .eq('game_id', gameId)
       .select();

@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Separator } from '@/components/ui/separator';
 import { UserPlus, ArrowLeft } from 'lucide-react';
+import { EuroIcon } from 'lucide-react';
 
 import { createClient } from '../utils/superbase/client';
 import { useUser } from '../hooks/useUser';
@@ -39,6 +40,7 @@ import { avatarsArray } from '@/constants/data';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { useRouter } from 'next/navigation';
 import { Loader2 } from 'lucide-react';
+// import EurPoints from '@/components/eur-points';
 
 // Extract the values from avatarsArray
 const avatarValues = avatarsArray.map((avatar) => avatar.value);
@@ -160,79 +162,89 @@ const Step = ({
   }, [user]);
 
   return (
-    <Card className='w-11/12 md:w-4/6 lg:w-3/6'>
-      <CardHeader>
-        <CardTitle>{title}</CardTitle>
-      </CardHeader>
-      <CardContent>
-        {children}
+    <>
+      {/* {isFirstStep && <EurPoints />} */}
+      <Card className='w-11/12 md:w-4/6 lg:w-3/6'>
+        <CardHeader>
+          <CardTitle>{title}</CardTitle>
+        </CardHeader>
+        <CardContent>
+          {children}
 
-        {!isLastStep && !isFirstStep ? (
-          <>
-            {' '}
-            <div className='flex items-center my-4 mx-1'>
-              <Separator className='flex-grow shrink ' />
-              <span className='px-3 text-sm text-muted-foreground'>VAI</span>
-              <Separator className='flex-grow shrink' />
-            </div>
-            <Popover className='z-[100]' open={open} onOpenChange={setOpen}>
-              <PopoverTrigger asChild>
-                <Button variant='outline' className='w-full'>
-                  {selectedUser ? (
-                    <>{selectedUser.display_name} </>
-                  ) : (
-                    <>
-                      {' '}
-                      <UserPlus className='w-4 h-4 mr-2' />
-                      Pievieno draugu
-                    </>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent
-                className='w-full p-0'
-                side='bottom'
-                align='center'
-                sideOffset={5}
-              >
-                <FriendsList
-                  setOpen={setOpen}
-                  friends={friends}
-                  setSelectedUser={setSelectedUser}
-                  friendSelect={handleFriendSelect}
-                  stepState={stepState}
-                  formData={formData}
-                />
-              </PopoverContent>
-            </Popover>
-          </>
-        ) : null}
-      </CardContent>
-      {error && (
-        <div className='text-center'>
-          <p className='text-red-500 mb-3'>{error}</p>
-        </div>
-      )}
-      <CardFooter className='flex justify-between'>
-        <Button
-          //   className={isFirstStep ? 'invisible' : ''}
-          onClick={onPrevious}
-          //   disabled={isFirstStep}
-        >
-          <ArrowLeft />
-        </Button>
-        <Button onClick={handleNextClick}>
-          {loading && <Loader2 className='mr-2 h-4 w-4 animate-spin' />}
-          {isLastStep || playersCount == stepState
-            ? `Sākt spēli`
-            : 'Nākamais spēlētājs'}
-        </Button>
-      </CardFooter>
-    </Card>
+          {!isLastStep && !isFirstStep ? (
+            <>
+              {' '}
+              <div className='flex items-center my-4 mx-1'>
+                <Separator className='flex-grow shrink ' />
+                <span className='px-3 text-sm text-muted-foreground'>VAI</span>
+                <Separator className='flex-grow shrink' />
+              </div>
+              <Popover className='z-[100]' open={open} onOpenChange={setOpen}>
+                <PopoverTrigger asChild>
+                  <Button variant='outline' className='w-full'>
+                    {selectedUser ? (
+                      <>{selectedUser.display_name} </>
+                    ) : (
+                      <>
+                        {' '}
+                        <UserPlus className='w-4 h-4 mr-2' />
+                        Pievieno draugu
+                      </>
+                    )}
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent
+                  className='w-full p-0'
+                  side='bottom'
+                  align='center'
+                  sideOffset={5}
+                >
+                  <FriendsList
+                    setOpen={setOpen}
+                    friends={friends}
+                    setSelectedUser={setSelectedUser}
+                    friendSelect={handleFriendSelect}
+                    stepState={stepState}
+                    formData={formData}
+                  />
+                </PopoverContent>
+              </Popover>
+            </>
+          ) : null}
+        </CardContent>
+        {error && (
+          <div className='text-center'>
+            <p className='text-red-500 mb-3'>{error}</p>
+          </div>
+        )}
+        <CardFooter className='flex justify-between'>
+          <Button
+            //   className={isFirstStep ? 'invisible' : ''}
+            onClick={onPrevious}
+            //   disabled={isFirstStep}
+          >
+            <ArrowLeft />
+          </Button>
+          <Button onClick={handleNextClick}>
+            {loading && error.length == 0 && (
+              <Loader2 className='mr-2 h-4 w-4 animate-spin' />
+            )}
+            {isLastStep || playersCount == stepState
+              ? `Sākt spēli`
+              : 'Nākamais spēlētājs'}
+          </Button>
+        </CardFooter>
+      </Card>
+    </>
   );
 };
 
-export default function StepPlayersForm({ playersCount, setBack }) {
+export default function StepPlayersForm({
+  playersCount,
+  eurValue,
+  isEurEnabled,
+  setBack,
+}) {
   const { user } = useUser();
 
   const [step, setStep] = useState(1);
@@ -273,7 +285,7 @@ export default function StepPlayersForm({ playersCount, setBack }) {
 
   const handleBackClick = (e) => {
     e.preventDefault();
-    setBack(null);
+    setBack(false);
   };
 
   const handleSubmit = async () => {
@@ -296,6 +308,7 @@ export default function StepPlayersForm({ playersCount, setBack }) {
         player_4: playersCount == 4 ? formData[3].name : null,
         player_4_avatar: playersCount == 4 ? formData[3].avatar : null,
         player_4_id: playersCount == 4 ? formData[3].id : null,
+        eur_points: isEurEnabled ? eurValue : null,
       })
       .select();
 
@@ -312,6 +325,7 @@ export default function StepPlayersForm({ playersCount, setBack }) {
           player_2_score: [],
           player_3_score: [],
           player_4_score: playersCount == 4 ? [] : null,
+          scenarios: [],
         })
         .select();
 
@@ -377,20 +391,32 @@ export default function StepPlayersForm({ playersCount, setBack }) {
   };
 
   const renderSummary = () => (
-    <div className='space-y-4'>
-      {formData
-        .filter((item) => item.name && item.avatar)
-        .map((player, index) => (
-          <div key={index} className='flex items-center space-x-4'>
-            <Avatar>
-              <AvatarImage src={player.avatar} alt={player.name} />
-              {/* <AvatarFallback>{player.initials}</AvatarFallback> */}
-            </Avatar>
-            <div>
-              <p className='text-sm font-medium leading-none'>{player.name}</p>
+    <div className='flex flex-row items-start justify-between'>
+      {' '}
+      <div className='space-y-4'>
+        {formData
+          .filter((item) => item.name && item.avatar)
+          .map((player, index) => (
+            <div key={index} className='flex items-center space-x-4'>
+              <Avatar>
+                <AvatarImage src={player.avatar} alt={player.name} />
+                {/* <AvatarFallback>{player.initials}</AvatarFallback> */}
+              </Avatar>
+              <div>
+                <p className='text-sm font-medium leading-none'>
+                  {player.name}
+                </p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+      </div>
+      {isEurEnabled && (
+        <div className='flex flex-row'>
+          <span className='pl-1 flex items-center underline underline-offset-4 text-primary font-bold text-3xl'>
+            <EuroIcon className='text-3xl text-primary' /> {eurValue}
+          </span>
+        </div>
+      )}
     </div>
   );
 

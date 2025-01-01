@@ -16,12 +16,17 @@ import { createClient } from '../utils/superbase/client';
 const DeleteIcon = Icons['delete'];
 
 export default function DeleteLastScore({ score, onScoreUpdate }) {
+  // console.log('score, delete', score);
   const handleDeleteLastScore = async () => {
     let obj = score;
 
     obj.player_1_score.pop();
     obj.player_2_score.pop();
     obj.player_3_score.pop();
+    if (obj.scenarios != null) {
+      obj.scenarios.pop();
+    }
+
     if (obj.player_4_score != null) {
       obj.player_4_score.pop();
     }
@@ -36,6 +41,7 @@ export default function DeleteLastScore({ score, onScoreUpdate }) {
         player_2_score: obj.player_2_score,
         player_3_score: obj.player_3_score,
         player_4_score: obj.player_4_score != null ? obj.player_4_score : null,
+        scenarios: obj.scenarios != null ? obj.scenarios : null,
       }) // Assuming 'data' is the jsonb column
       .eq('game_id', obj.game_id)
       .select();
