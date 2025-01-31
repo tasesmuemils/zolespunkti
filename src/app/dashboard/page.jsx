@@ -26,7 +26,7 @@ export default function PrivatePage() {
   const { user } = useUser();
   // console.log(user);
 
-  // console.log('TEST', isDialogOpen);
+  // console.log('TESTTTTT', isDialogOpen);
 
   if (user) {
     return (
