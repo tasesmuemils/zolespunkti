@@ -108,7 +108,10 @@ export function RecentGames({ user }) {
     return <p>{`Spied "Jauna spēle" un sāc skaitīt punktus`}</p>;
   }
 
-  // console.log(games);
+  console.log('Games', games);
+
+  const targetDate = new Date('2025-01-30T14:30:53.00126+00:00');
+  const now = new Date();
   if (games) {
     return (
       <div className='space-y-8'>
@@ -131,7 +134,7 @@ export function RecentGames({ user }) {
                 </p>
               </div>
               <div className='ml-auto font-medium'>
-                {index == 0 ? (
+                {index === 0 && now > targetDate ? (
                   <Link href={`/dashboard/game/${game.id}`}>
                     <Button
                       className='text-xs md:text-sm'
