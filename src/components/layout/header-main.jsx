@@ -1,10 +1,10 @@
 import { ModeToggle } from '@/components/component/mode-toogle';
-import Link from 'next/link';
 import {
   NavigationMenu,
   NavigationMenuItem,
   NavigationMenuList,
 } from '@/components/ui/navigation-menu';
+import Image from 'next/image';
 
 export default function Navbar() {
   return (
@@ -17,7 +17,14 @@ export default function Navbar() {
               href='/'
               className='ml-2 font-bold text-xl flex'
             >
-              Zoles Punkti
+              {/* <Image
+                src='/logos/test.svg'
+                alt='Zoles Punkti'
+                width={40}
+                height={40}
+                priority={true} // Add this if the logo is above the fold
+              /> */}
+              <p>Zoles Punkti</p>
             </a>
           </NavigationMenuItem>
 

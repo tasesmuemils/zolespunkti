@@ -59,6 +59,8 @@ export function Controls({ players, gameId, onScoreUpdate, scenarios }) {
 
   // Handle scenario
   const handleScenario = async (value, gameId) => {
+    console.log(value, gameId, winner, gameType, lielais);
+
     const arr = players.map((player) => {
       if (player.player == winner) {
         player.score.length > 0
@@ -78,6 +80,22 @@ export function Controls({ players, gameId, onScoreUpdate, scenarios }) {
 
     handleOpenChange(false);
 
+    // EDIT MAZA ZOLE & GALDINS lielais state
+    let lielaisEdit = null;
+    if (
+      (gameType == 'Mazā zole' || gameType == 'Galdiņš') &&
+      value.Lielajam > 0
+    ) {
+      lielaisEdit = 'Uzvarēja';
+    } else if (
+      (gameType == 'Mazā zole' || gameType == 'Galdiņš') &&
+      value.Lielajam < 0
+    ) {
+      lielaisEdit = 'Zaudēja';
+    } else {
+      lielaisEdit = lielais;
+    }
+
     // console.log('arr', arr);
     // console.log(winner, gameType, lielais);
 
@@ -93,7 +111,7 @@ export function Controls({ players, gameId, onScoreUpdate, scenarios }) {
         player_4_score: arr.length == 4 ? arr[3].score : null,
         scenarios:
           scenarios != null
-            ? [...scenarios, { W: winner, GT: gameType, L: lielais }]
+            ? [...scenarios, { W: winner, GT: gameType, L: lielaisEdit }]
             : null,
       }) // Assuming 'data' is the jsonb column
       .eq('game_id', gameId)
@@ -310,6 +328,8 @@ export function Controls({ players, gameId, onScoreUpdate, scenarios }) {
 }
 
 const ControlsButton = ({ text, index, onClickFunction }) => {
+  console.log(text, index);
+
   return (
     <Button
       variant='outline'

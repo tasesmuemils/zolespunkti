@@ -24,6 +24,11 @@
     --input: 220 13% 91%;
     --ring: 262.1 83.3% 57.8%;
     --radius: 0.5rem;
+    --chart-1: 263 65% 55%; /* Slightly shifted to align with --primary */
+    --chart-2: 20 70% 60%; /* Balanced saturation and lightness */
+    --chart-3: 200 40% 30%; /* Deepened to pair well with --primary */
+    --chart-4: 45 70% 65%; /* Kept vibrant but softened saturation */
+    --chart-5: 30 80% 60%; /* Slightly closer to natural greens */
   }
 
   .dark {
@@ -46,6 +51,11 @@
     --border: 215 27.9% 16.9%;
     --input: 215 27.9% 16.9%;
     --ring: 263.4 70% 50.4%;
+    --chart-1: 220 65% 50%; /* Softer blue for dark mode contrast */
+    --chart-5: 160 55% 40%; /* Reduced saturation for harmony */
+    --chart-3: 35 75% 50%; /* Warmer tone for better pairing */
+    --chart-4: 275 60% 55%; /* Purple tint, complementing primary */
+    --chart-2: 340 70% 50%; /* Muted red for subtlety in dark mode */
   }
 }
 
@@ -123,4 +133,8 @@ html {
       right: 100px;
     }
   }
+}
+
+.text-chart-1 {
+  color: var(--chart-5);
 }
