@@ -20,9 +20,9 @@ import { RefreshCw } from 'lucide-react';
 
 export const HeroCards = () => {
   return (
-    <div className='mt-32 lg:mt-0 grid grid-cols-1 lg:flex lg:flex-row lg:flex-wrap gap-8 relative lg:w-[700px] lg:h-[500px]'>
+    <div className='mt-32 2xl:mt-0 grid grid-cols-1 2xl:flex 2xl:flex-row 2xl:flex-wrap gap-8 relative 2xl:w-[700px] 2xl:h-[500px]'>
       {/* Testimonial */}
-      <Card className='lg:absolute lg:w-[340px] lg:-top-[15px] drop-shadow-xl shadow-black/10 dark:shadow-white/10 order-1'>
+      <Card className='2xl:absolute 2xl:w-[340px] 2xl:-top-[15px] drop-shadow-xl shadow-black/10 dark:shadow-white/10 order-1'>
         <CardHeader className='flex flex-row items-center gap-4 pb-2'>
           {/* <Avatar>
             <AvatarImage alt='' src='/emils_avatar.jpeg' />
@@ -43,7 +43,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Team */}
-      <Card className='my-4 lg:my-0 lg:absolute lg:right-[20px] lg:top-4 lg:w-80 flex flex-col justify-center items-center drop-shadow-xl shadow-black/10 dark:shadow-white/10 order-4 lg:order-2'>
+      <Card className='my-4 2xl:my-0 2xl:absolute 2xl:right-[20px] 2xl:top-4 2xl:w-80 flex flex-col justify-center items-center drop-shadow-xl shadow-black/10 dark:shadow-white/10 order-4 2xl:order-2'>
         <CardHeader className=' flex justify-center items-center pb-2'>
           {/* <Image
             src='/emils_avatar.jpeg'
@@ -134,7 +134,7 @@ export const HeroCards = () => {
       </Card>
 
       {/* Pricing */}
-      <Card className='lg:absolute lg:top-[150px] lg:left-[50px] lg:w-72  drop-shadow-xl shadow-black/10 dark:shadow-white/10 order-2 lg:order-3'>
+      <Card className='2xl:absolute 2xl:top-[150px] 2xl:left-[50px] 2xl:w-72  drop-shadow-xl shadow-black/10 dark:shadow-white/10 order-2 2xl:order-3'>
         {/* <CardHeader>
           <CardTitle className='flex item-center justify-between'>
             Free
@@ -158,8 +158,8 @@ export const HeroCards = () => {
 
         <hr className='w-4/5 m-auto mb-4' />
 
-        <CardFooter className='flex'>
-          <div className='space-y-4'>
+        <CardFooter className='flex justify-center'>
+          <div className=' grid gap-2 justify-start items-start lg:grid-cols-2  2xl:grid-cols-1'>
             {[
               '3-4 spēlētāji',
               'Uzaicini draugus',
@@ -167,6 +167,7 @@ export const HeroCards = () => {
               'Partiju skaits un rezultātu tabula',
               'Spēļu vēsture',
               'Skaiti EUR punktā',
+              'Statistika katrai spēlei',
             ].map((benefit) => (
               <span key={benefit} className='flex'>
                 <Check className='text-green-500' />{' '}
@@ -178,8 +179,8 @@ export const HeroCards = () => {
       </Card>
 
       {/* Service */}
-      <Card className='lg:absolute lg:w-[350px] lg:-right-[10px] lg:bottom-[110px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10 order-3 lg:order-4'>
-        <CardHeader className='space-y-1 flex md:flex-row justify-start items-start gap-4'>
+      <Card className='2xl:absolute 2xl:w-[350px] 2xl:-right-[10px] 2xl:bottom-[110px]  drop-shadow-xl shadow-black/10 dark:shadow-white/10 order-3 2xl:order-4'>
+        <CardHeader className='space-y-1 flex md:flex-row justify-center 2xl:justify-start items-start gap-4'>
           <div className='mt-1 bg-primary/20 p-1 rounded-2xl'>
             <LightBulbIcon />
           </div>
