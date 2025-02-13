@@ -38,8 +38,8 @@ export default function Home() {
   return (
     <>
       <HeaderMain />
-      <section className='container lg:grid lg:grid-cols-2 place-items-center py-20 md:py-32 gap-10'>
-        <div className='text-center lg:text-start space-y-6'>
+      <section className='container 2xl:grid 2xl:grid-cols-2 place-items-center py-20 md:py-32 gap-10'>
+        <div className='text-center 2xl:text-start space-y-6'>
           <main className='text-5xl md:text-6xl font-bold'>
             <h1 className='inline'>
               {/* <span className='inline bg-gradient-to-r from-[#61DAFB] via-[#1fc0f1] to-[#03a3d7] text-transparent bg-clip-text'>
@@ -64,7 +64,7 @@ export default function Home() {
             </h2>
           </main>
 
-          <p className='text-xl text-muted-foreground md:w-10/12 mx-auto lg:mx-0'>
+          <p className='text-xl text-muted-foreground md:w-10/12 mx-auto 2xl:mx-0'>
             Nezaudē laiku meklējot, kur pierakstīt Zoles punktus – izmanto
             aplikāciju bez piepūles un ērti uz jebkuras ierīces!
           </p>

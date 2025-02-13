@@ -10,7 +10,7 @@ export default function Navbar() {
   return (
     <header className='sticky border-b-[1px] top-0 z-40 w-full bg-white dark:border-b-slate-700 dark:bg-background'>
       <NavigationMenu className='mx-auto'>
-        <NavigationMenuList className='container h-14 px-4 w-screen flex justify-between '>
+        <NavigationMenuList className='container h-14 w-[95vw] px-4 flex justify-between overflow-hidden '>
           <NavigationMenuItem className='font-bold flex'>
             <a
               rel='noreferrer noopener'
@@ -28,7 +28,7 @@ export default function Navbar() {
             </a>
           </NavigationMenuItem>
 
-          <div className='flex gap-2'>
+          <div className='flex '>
             <ModeToggle />
           </div>
         </NavigationMenuList>
